@@ -1,13 +1,22 @@
 import { Container, Content } from './styles';
 import logo from '../../assets/logo.svg'
 
-export const Header: React.FC = () => {
+interface IHeaderProps {
+  onOpenNewTransactionModal: () => void
+}
+
+export const Header: React.FC<IHeaderProps> = ({ onOpenNewTransactionModal }) => {
   return (
     <Container>
       <Content>
         <img src={logo} alt="ES Money"/>
 
-        <button>Nova transação</button>
+        <button
+          type="button"
+          onClick={onOpenNewTransactionModal}
+        >
+          Nova transação
+        </button>
       </Content>
     </Container>
   )
