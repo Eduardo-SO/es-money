@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 Modal.setAppElement('#root')
 
@@ -14,11 +14,29 @@ const NewTransactionModal: React.FC<INewTransactionModalProps> = ({ isOpen, onRe
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      contentLabel="Example modal"
+      overlayClassName="react-modal-overlay"
+      className="react-modal-content"
     >
-      <h2>Cadastrar transação</h2>
-    </Modal>
-  )
-}
+      <Container>
+        <h2>Cadastrar transação</h2>
 
-export default NewTransactionModal;
+        <input
+          placeholder="Titulo"
+        />
+
+        <input
+          type="number"
+          placeholder="Valor"
+        />
+
+        <input
+          placeholder="Categoria"
+        />
+
+        <button type="submit">Cadastrar</button>
+      </Container>
+    </Modal>
+    )
+  }
+
+  export default NewTransactionModal;
