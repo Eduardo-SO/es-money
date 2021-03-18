@@ -1,6 +1,13 @@
+import { useEffect } from 'react';
 import { Container } from './styles';
 
 export const TransactionsTable: React.FC = () => {
+  useEffect(() => {
+    fetch('http://localhost:3001/api/transactions')
+    .then(response => response.json())
+    .then(data => console.log(data))
+  }, [])
+
   return (
     <Container>
       <table>
@@ -21,7 +28,7 @@ export const TransactionsTable: React.FC = () => {
             <td>15/03/21</td>
           </tr>
           <tr>
-            <td>Desenvolvimento de Website</td>
+            <td>Aluguel</td>
             <td className="withdraw">- R$1.100,00</td>
             <td>Casa</td>
             <td>10/03/21</td>
