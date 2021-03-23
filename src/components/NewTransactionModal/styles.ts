@@ -16,6 +16,7 @@ export const Container = styled.form`
 
     border: 1px solid #222;
     background: var(--background);
+    color: var(--text-body);
 
     font-weight: 400;
     font-size: 1rem;
@@ -55,7 +56,6 @@ export const TransactionTypeContainer = styled.div`
   gap: 0.5rem;
   margin: 1rem 0;
 `
-
 
 interface RadioBoxProps {
   isActive: boolean
