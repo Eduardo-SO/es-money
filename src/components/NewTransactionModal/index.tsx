@@ -1,11 +1,12 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import Modal from 'react-modal';
+import { TransactionsContext } from '../../TransactionsContext';
 
-import { api } from '../../services/api';
-import { Container, TransactionTypeContainer, RadioBox } from './styles';
 import closeIcon from '../../assets/close.svg'
 import incomeIcon from '../../assets/income.svg'
 import outcomeIcon from '../../assets/outcome.svg'
+
+import { Container, TransactionTypeContainer, RadioBox } from './styles';
 
 Modal.setAppElement('#root')
 
@@ -15,22 +16,22 @@ interface INewTransactionModalProps {
 }
 
 const NewTransactionModal: React.FC<INewTransactionModalProps> = ({ isOpen, onRequestClose }) => {
+  const { createTransaction } = useContext(TransactionsContext)
+
   const [ title, setTitle ] = useState('')
-  const [ value, setValue ] = useState(0)
+  const [ amount, setAmount ] = useState(0)
   const [ category, setCategory ] = useState('')
-  const [transactionType, setTransactionType] = useState<'deposit' | 'withdraw'>('deposit')
+  const [ type, setType ] = useState<'deposit' | 'withdraw'>('deposit')
 
   function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault()
 
-    const data = {
+    createTransaction({
       title,
-      value,
+      amount,
       category,
-      transactionType
-    }
-
-    api.post('/transactions', data)
+      type: type
+    })
   }
 
   return (
@@ -60,16 +61,16 @@ const NewTransactionModal: React.FC<INewTransactionModalProps> = ({ isOpen, onRe
         <input
           type="number"
           placeholder="Valor"
-          value={value}
-          onChange={(event) => setValue(Number(event.target.value))}
+          value={amount}
+          onChange={(event) => setAmount(Number(event.target.value))}
           min="0"
         />
 
         <TransactionTypeContainer>
           <RadioBox
-            onClick={() => setTransactionType('deposit')}
+            onClick={() => setType('deposit')}
             type="button"
-            isActive={transactionType === 'deposit'}
+            isActive={type === 'deposit'}
             activeColor="green"
           >
             <img src={incomeIcon} alt="Entrada"/>
@@ -77,9 +78,9 @@ const NewTransactionModal: React.FC<INewTransactionModalProps> = ({ isOpen, onRe
           </RadioBox>
 
           <RadioBox
-            onClick={() => setTransactionType('withdraw')}
+            onClick={() => setType('withdraw')}
             type="button"
-            isActive={transactionType === 'withdraw'}
+            isActive={type === 'withdraw'}
             activeColor="red"
           >
             <img src={outcomeIcon} alt="Saída"/>
