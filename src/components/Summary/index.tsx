@@ -1,13 +1,12 @@
-import { useContext } from 'react'
+import { useTransactions } from '../../hooks/useTransactions';
 
-import { TransactionsContext } from '../../TransactionsContext';
 import { Container } from './styles';
 import incomeIcon from '../../assets/income.svg'
 import outcomeIcon from '../../assets/outcome.svg'
 import totalIcon from '../../assets/total.svg'
 
 export const Summary: React.FC = () => {
-  const { transactions } = useContext(TransactionsContext)
+  const { transactions } = useTransactions()
 
   // const totalDeposits = transactions.reduce((acc, transaction) => {
   //   if (transaction.type === 'deposit') {

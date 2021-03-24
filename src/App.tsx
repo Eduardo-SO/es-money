@@ -4,7 +4,7 @@ import NewTransactionModal from './components/NewTransactionModal';
 import { Dashboard } from './components/Dashboard';
 import { GlobalStyle } from './styles/global'
 import { Header } from './components/Header'
-import { TransactionProvider } from './TransactionsContext';
+import { TransactionProvider } from './hooks/useTransactions';
 
 export function App() {
   const [ isNewTransactionModalOpen, setIsNewTransactionModalOpen ] = useState(false)
